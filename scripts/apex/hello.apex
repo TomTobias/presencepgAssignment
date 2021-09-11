@@ -8,3 +8,8 @@
 string tempvar = 'Enter_your_name_here';
 System.debug('Hello World!');
 System.debug('My name is ' + tempvar);
+
+
+Payment__c[] payments = PaymentsService.getPeoplePaymentDetails('0035f000002YwPxAAK');
+System.debug(payments);
+

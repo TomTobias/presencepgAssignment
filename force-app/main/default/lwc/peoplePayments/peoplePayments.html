@@ -1,27 +1,21 @@
+<!-- sldsValidatorIgnore -->
 <template>
     <lightning-card title="People Payments" icon-name="utility:moneybag">
         <ul class="slds-var-m-around_medium">
-            
             <template if:true={peoplePaymentSummaries.data}>
-
-                <template for:each={peoplePaymentSummaries.data} for:item="peoplePayment">
+                <template for:each={peoplePaymentSummaries.data} for:item="peoplePayment">  
                     <li key={peoplePayment.Id}>
-                        Person: 
-                        <lightning-formatted-text value={peoplePayment.Name} ></lightning-formatted-text>
-                        ,   
-                        Total Amount Paid: <lightning-formatted-number value={peoplePayment.Total_Payments_Amount__c} format-style="currency" currency-code="USD"></lightning-formatted-number>
-                        ,  
-                        Most Recent Payment: <lightning-formatted-date-time value={peoplePayment.Most_Recent_Payment__c}></lightning-formatted-date-time>
-                        <template for:each={peoplePaymentSummaries.data} for:item="name">
-                            <li key={name.Id}>
-                                Person: 
-                        <lightning-formatted-text value={name.Name} ></lightning-formatted-text>
-                            </li>
-                        </template>
-                    </li>
-                    
-                </template>
 
+                        <div class="slds-m-vertical_x-large">
+                            <h1 class ="slds-truncate slds-text-heading_medium slds-m-vertical_x-small"><lightning-formatted-text value={peoplePayment.Name} ></lightning-formatted-text></h1>
+                            <h2 class ="slds-truncate slds-text-heading_small slds-m-vertical_x-small">Total Amount Paid: <lightning-formatted-number value={peoplePayment.Total_Payments_Amount__c} format-style="currency" currency-code="USD"></lightning-formatted-number></h2>
+                            <h2 class ="slds-truncate slds-text-heading_small slds-m-vertical_x-small">Most Recent Payment: <lightning-formatted-date-time value={peoplePayment.Most_Recent_Payment__c}></lightning-formatted-date-time></h2>
+                        </div>
+                        
+                        <c-people-payment-details contactid = {peoplePayment.Id}></c-people-payment-details>
+                    
+                    </li>
+                </template>
             </template>
         </ul>
     </lightning-card>

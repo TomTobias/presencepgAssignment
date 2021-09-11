@@ -3,11 +3,13 @@ import { LightningElement, wire } from 'lwc';
 import getPeoplePaymentSummaries from '@salesforce/apex/PaymentsService.getPeoplePaymentSummaries';
 
 export default class PeoplePayments extends LightningElement {
+
     
+
     @wire(getPeoplePaymentSummaries) 
     peoplePaymentSummaries;
 
-    
+   
 
     
 }
