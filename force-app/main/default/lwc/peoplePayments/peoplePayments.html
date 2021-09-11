@@ -1,7 +1,18 @@
 <template>
     <lightning-card title="People Payments" icon-name="utility:moneybag">
         <ul class="slds-var-m-around_medium">
-            Hi
+            
+            <template if:true={peoplePaymentSummaries.data}>
+
+                <template for:each={peoplePaymentSummaries.data} for:item="peoplePayment">
+                    <li key={peoplePayment.Id}>
+                        {peoplePayment.Name}, 
+                        {peoplePayment.Total_Payments_Amount__c},
+                        {peoplePayment.Most_Recent_Payment__c}
+                    </li>
+                </template>
+
+            </template>
         </ul>
     </lightning-card>
 </template>
