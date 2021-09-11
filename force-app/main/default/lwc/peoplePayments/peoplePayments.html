@@ -6,10 +6,20 @@
 
                 <template for:each={peoplePaymentSummaries.data} for:item="peoplePayment">
                     <li key={peoplePayment.Id}>
-                        {peoplePayment.Name}, 
-                        {peoplePayment.Total_Payments_Amount__c},
-                        {peoplePayment.Most_Recent_Payment__c}
+                        Person: 
+                        <lightning-formatted-text value={peoplePayment.Name} ></lightning-formatted-text>
+                        ,   
+                        Total Amount Paid: <lightning-formatted-number value={peoplePayment.Total_Payments_Amount__c} format-style="currency" currency-code="USD"></lightning-formatted-number>
+                        ,  
+                        Most Recent Payment: <lightning-formatted-date-time value={peoplePayment.Most_Recent_Payment__c}></lightning-formatted-date-time>
+                        <template for:each={peoplePaymentSummaries.data} for:item="name">
+                            <li key={name.Id}>
+                                Person: 
+                        <lightning-formatted-text value={name.Name} ></lightning-formatted-text>
+                            </li>
+                        </template>
                     </li>
+                    
                 </template>
 
             </template>
