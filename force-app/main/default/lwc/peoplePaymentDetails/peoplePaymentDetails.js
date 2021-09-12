@@ -1,12 +1,12 @@
 import { LightningElement, api, wire } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import getPeoplePaymentDetails from '@salesforce/apex/PaymentsService.getPeoplePaymentDetails';
-import updateContactList from '@salesforce/apex/PaymentsService.updateContactList';
+import updatePaymentList from '@salesforce/apex/PaymentsService.updatePaymentList';
 import { refreshApex } from '@salesforce/apex';
 
 
 const SUCCESS_TITLE = 'Success';
-const MESSAGE_SHIP_IT = 'Ship it!';
+const MESSAGE_SHIP_IT = 'Refresh Page for Total Amount Paid Update';
 const SUCCESS_VARIANT = 'success';
 const ERROR_TITLE   = 'Error';
 const ERROR_VARIANT = 'error';
@@ -16,6 +16,10 @@ export default class PeoplePaymentDetails extends LightningElement {
         { label: 'Payment Date', fieldName: 'Payment_Date__c', type: 'date-local', editable: 'true' },
         { label: 'Payment Amount', fieldName: 'Payment_Amount__c', type: 'currency', editable: 'true' },
     ];
+
+    actions = [
+      { label: 'Delete', name: 'delete' }
+  ];
 
     clickedButtonLabel;
     @api contactid = '';
@@ -39,7 +43,7 @@ export default class PeoplePaymentDetails extends LightningElement {
     handleSave(event) {
         const updatedFields = event.detail.draftValues;
         // Update the records via Apex
-        updateContactList({data: updatedFields})
+        updatePaymentList({data: updatedFields})
         .then(() => {
           this.refresh();
           const event = new ShowToastEvent({
@@ -51,6 +55,8 @@ export default class PeoplePaymentDetails extends LightningElement {
     
          })
         .catch(error => {
+          console.log(updatedFields)
+          console.log(error)
           const event = new ShowToastEvent({
             title: ERROR_TITLE,
             variant: ERROR_VARIANT

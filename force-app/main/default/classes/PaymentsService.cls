@@ -18,13 +18,13 @@ public with sharing class PaymentsService {
     }
 
     @AuraEnabled
-    public static string updateContactList(Object data){
-        List<Contact> contactsForUpdate = (List<Contact>) JSON.deserialize(
+    public static string updatePaymentList(Object data){
+        List<Payment__c> paymentsForUpdate = (List<Payment__c>) JSON.deserialize(
             JSON.serialize(data),
-            List<Contact>.class
+            List<Payment__c>.class
         );
 
-        update contactsForUpdate;
+        update paymentsForUpdate;
         return 'Success: Contacts updated successfully';
     }
 }
