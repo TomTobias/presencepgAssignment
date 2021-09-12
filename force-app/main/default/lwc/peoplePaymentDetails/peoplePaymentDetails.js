@@ -14,7 +14,7 @@ const ERROR_VARIANT = 'error';
 export default class PeoplePaymentDetails extends LightningElement {
     columns = [
         { label: 'Payment Date', fieldName: 'Payment_Date__c', type: 'date-local', editable: 'true' },
-        { label: 'Payment Amount', fieldName: 'Payment_Amount__c', type: 'currency', editable: 'true' },
+        { label: 'Payment Amount', fieldName: 'Payment_Amount__c', type: 'currency', editable: 'true', cellAttributes: { alignment: 'left' } },
     ];
 
     actions = [
