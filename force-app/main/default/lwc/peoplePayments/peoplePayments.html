@@ -1,13 +1,19 @@
 <!-- sldsValidatorIgnore -->
 <template>
-    <lightning-card title="People Payments" icon-name="utility:moneybag">
-        <ul class="slds-var-m-around_medium">
-            <template if:true={peoplePaymentSummaries}>
-                <template for:each={peoplePaymentSummaries} for:item="peoplePayment">  
-                    <li key={peoplePayment.Id}>
-
+    <template if:true={peoplePaymentSummaries}>
+        <template for:each={peoplePaymentSummaries} for:item="peoplePayment">  
+            <div key={peoplePayment.Id} class="slds-m-bottom_small">
+                <lightning-card title={peoplePayment.Name} icon-name="utility:moneybag">
+                    
+                    <div slot="actions">
+                        <lightning-button label="Add Payment" 
+                            title="Add Payment" onclick={createNewPayment} 
+                            class="slds-m-left_x-small">
+                        </lightning-button>
+                    </div>
+                    
+                    <div class="slds-var-m-around_medium">
                         <div class="slds-m-vertical_x-large">
-                            <h1 class ="slds-truncate slds-text-heading_medium slds-m-vertical_x-small"><lightning-formatted-text value={peoplePayment.Name} ></lightning-formatted-text></h1>
                             <h2 class ="slds-truncate slds-text-heading_small slds-m-vertical_x-small">Total Amount Paid: <lightning-formatted-number value={peoplePayment.Total_Payments_Amount__c} format-style="currency" currency-code="USD"></lightning-formatted-number></h2>
                             <h2 class ="slds-truncate slds-text-heading_small slds-m-vertical_x-small">Most Recent Payment: <lightning-formatted-date-time value={peoplePayment.Most_Recent_Payment__c}></lightning-formatted-date-time></h2>
                         </div>
@@ -16,13 +22,12 @@
                             contactid={peoplePayment.Id}
                             onrefreshsummary={handleRefreshSummary}>
                         </c-people-payment-details>
-                    
-                    </li>
-                </template>
-            </template>
-            <template if:false={peoplePaymentSummaries}>
-                No people have made payments
-            </template>
-        </ul>
-    </lightning-card>
+                    </div>
+                </lightning-card>
+            </div>
+        </template>
+    </template>
+    <template if:false={peoplePaymentSummaries}>
+        No people have made payments
+    </template>
 </template>
