@@ -22,8 +22,9 @@ export default class PeoplePayments extends LightningElement {
     
     //peoplePaymentSummaries;
 
-    handleRefreshSummary() {
-
+    handleRefreshSummary() { //
+        refreshApex(this.wiredPeoplePaymentSummaries)
+        console.log('received refreshsummary event')
     }
 
     
