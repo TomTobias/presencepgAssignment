@@ -21,25 +21,26 @@ export default class PeoplePaymentDetails extends LightningElement {
       { label: 'Delete', name: 'delete' }
   ];
 
-    clickedButtonLabel;
     @api contactid = '';
 
     @wire(getPeoplePaymentDetails, {contactId: '$contactid'})
     peoplePaymentDetails;
 
-    wiredActivities; // for apex refresh
+    //wiredActivities; // for apex refresh
+
+    // debugging from button
     handleClick(event) {
-      this.clickedButtonLabel = event.target.label;
       console.log(this.clickedButtonLabel);
       console.log(this.contactid);
       console.log(this.peoplePaymentDetails);
     }
 
-    // this public function must refresh the boats asynchronously
+    // this public function must refresh the Payments asynchronously
     @api 
     async refresh() {
       await refreshApex(this.peoplePaymentDetails);
     }
+
     handleSave(event) {
         const updatedFields = event.detail.draftValues;
         // Update the records via Apex
@@ -52,18 +53,17 @@ export default class PeoplePaymentDetails extends LightningElement {
             message: MESSAGE_SHIP_IT
           });
           this.dispatchEvent(event);
-    
+          
+          // alert parent to refresh summary data
+          const refreshEvent = new CustomEvent('refreshsummary');
+          this.dispatchEvent(refreshEvent);
          })
         .catch(error => {
-          console.log(updatedFields)
-          console.log(error)
           const event = new ShowToastEvent({
             title: ERROR_TITLE,
             variant: ERROR_VARIANT
           });
           this.dispatchEvent(event);
         })
-        .finally(() => {
-        });
       }
 }

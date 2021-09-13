@@ -2,15 +2,20 @@
 <template>
     <div class="slds-scrollable_y slds-m-left_xx-large">
         <lightning-card title="Payment Details" icon-name="utility:money">
-            <lightning-datatable 
-                key-field="Id" 
-                data={peoplePaymentDetails.data} 
-                columns={columns} 
-                onsave={handleSave}
-                hide-checkbox-column>
-            </lightning-datatable>
+            <template if:true={peoplePaymentDetails.data}>
+                <lightning-datatable 
+                    key-field="Id" 
+                    data={peoplePaymentDetails.data} 
+                    columns={columns} 
+                    onsave={handleSave}
+                    hide-checkbox-column>
+                </lightning-datatable>
+            </template>
+            <template if:false={peoplePaymentDetails.data}>
+                There are no payments
+            </template>
             <div class="slds-m-top_x-large">
-                <lightning-button variant="brand" label="Brand" title="Primary action" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
+                <lightning-button label="Testing" title="Testing" onclick={handleClick} class="slds-m-left_x-small"></lightning-button>
             </div>
         </lightning-card>
     </div>

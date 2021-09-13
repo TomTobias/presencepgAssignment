@@ -12,10 +12,16 @@
                             <h2 class ="slds-truncate slds-text-heading_small slds-m-vertical_x-small">Most Recent Payment: <lightning-formatted-date-time value={peoplePayment.Most_Recent_Payment__c}></lightning-formatted-date-time></h2>
                         </div>
                         
-                        <c-people-payment-details contactid = {peoplePayment.Id}></c-people-payment-details>
+                        <c-people-payment-details 
+                            contactid={peoplePayment.Id}
+                            onrefreshsummary={handleRefreshSummary}>
+                        </c-people-payment-details>
                     
                     </li>
                 </template>
+            </template>
+            <template if:false={peoplePaymentSummaries.data}>
+                No people have made payments
             </template>
         </ul>
     </lightning-card>
