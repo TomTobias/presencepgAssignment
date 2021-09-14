@@ -1,10 +1,11 @@
 import { LightningElement, wire, track } from 'lwc';
-//import getPeoplePayments from '@salesforce/apex/PeoplePayments.getPeoplePayments';
+import { NavigationMixin } from 'lightning/navigation';
 import getPeoplePaymentSummaries from '@salesforce/apex/PaymentsService.getPeoplePaymentSummaries';
 import { refreshApex } from '@salesforce/apex';
 
-export default class PeoplePayments extends LightningElement {
-
+export default class PeoplePayments extends NavigationMixin(LightningElement) {
+    
+    @track customFormModal = false; 
     @track peoplePaymentSummaries = [];
     wiredPeoplePaymentSummaries; // for apex refresh
 
@@ -20,14 +21,20 @@ export default class PeoplePayments extends LightningElement {
         }
     }
     
-    //peoplePaymentSummaries;
-
     handleRefreshSummary() {
         refreshApex(this.wiredPeoplePaymentSummaries)
         console.log('received refreshsummary event')
     }
-
-    createNewPayment() {
-
+    
+    customShowModalPopup() {            
+        this.customFormModal = true;
+    }
+ 
+    customHideModalPopup() {    
+        
+        this.customFormModal = false;
+    }
+    savePaymentRecord() {
+        
     }
 }
